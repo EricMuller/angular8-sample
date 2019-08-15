@@ -3,7 +3,10 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  KEYCLOAK_URL: 'https://keycloak.webmarks.net/auth',
+  KEYCLOAK_REALM: 'qcm',
+  KEYCLOAK_CLIENTID: 'qcm-web',
 };
 
 /*
