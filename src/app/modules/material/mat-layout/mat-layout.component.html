@@ -1,0 +1,16 @@
+<mat-card>
+  <mat-toolbar>Material Sample!
+    <span class="example-spacer"></span>
+    <button mat-icon-button [matMenuTriggerFor]="menu" matTooltip="More actions">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item [routerLinkActive]="['active']" routerLink="list">List</button>
+      <button mat-menu-item [routerLinkActive]="['active']" routerLink="table">Table</button>
+      <button mat-menu-item [routerLinkActive]="['active']" routerLink="grid">Grid</button>
+    </mat-menu>
+  </mat-toolbar>
+
+
+  <router-outlet></router-outlet>
+</mat-card>

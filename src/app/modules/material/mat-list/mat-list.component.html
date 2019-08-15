@@ -1,0 +1,13 @@
+
+
+  <mat-list>
+    <mat-list-item *ngFor="let message of posts">
+      <mat-icon matListIcon>folder</mat-icon>
+      <h3 matLine> {{message.userId}} </h3>
+      <p matLine>
+        <span> {{message.title}} </span>
+        <span class="demo-2"> -- {{message.body}} </span>
+      </p>
+    </mat-list-item>
+  </mat-list>
+

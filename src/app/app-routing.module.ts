@@ -20,6 +20,9 @@ const routes: Routes = [
     {
       path: 'link3',
       component: Link3Component,
+    }, {
+      path: 'material',
+      loadChildren: './modules/material/material.module#MaterialModule',
     },
   ]
 ;
