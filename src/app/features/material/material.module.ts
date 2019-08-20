@@ -8,6 +8,7 @@ import {
   MatIconModule,
   MatListModule,
   MatMenuModule,
+  MatSnackBarModule,
   MatTableModule,
   MatTabsModule,
   MatToolbarModule
@@ -17,15 +18,14 @@ import {MatTableComponent} from './mat-table/mat-table.component';
 import {MatLayoutComponent} from './mat-layout/mat-layout.component';
 import {MatGridComponent} from './mat-grid/mat-grid.component';
 import {RouterModule} from '@angular/router';
-import {CoreModule} from '../../core/core.module';
 
 
 @NgModule({
   declarations: [MatListComponent, MatTableComponent, MatLayoutComponent, MatGridComponent],
   imports: [
-    CommonModule,  RouterModule,
+    CommonModule, RouterModule,
     MatListModule, MatIconModule, MatToolbarModule, MatCardModule, MatButtonModule, MatIconModule,
-    MatTableModule, MatMenuModule, MatGridListModule, MatTabsModule, CoreModule.forRoot()
+    MatTableModule, MatMenuModule, MatGridListModule, MatTabsModule, MatSnackBarModule
   ], providers: [JsonService]
 })
 export class MaterialModule {

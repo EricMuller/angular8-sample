@@ -17,6 +17,7 @@ import {Link3Component} from './features/link3/link3.component';
 import {SidenavLayoutComponent} from './app/sidenav-layout/sidenav-layout.component';
 import {LandscapeLayoutComponent} from './app/landscape-layout/landscape-layout.component';
 import {CoreModule} from './core/core.module';
+import {QcmRestApiModule} from '@app/features/qcm-rest-api/qcm-rest-api.module';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import {CoreModule} from './core/core.module';
     MatSidenavModule,
     MatIconModule,
     MatListModule,
-    CoreModule.forRoot()
+    CoreModule.forRoot(),
+    QcmRestApiModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -23,7 +23,7 @@ const routes: Routes = [
     },
     {
       path: 'material',
-      loadChildren: './features/material/material-routing.module#MaterialRoutingModule',
+      loadChildren: () => import('./features/material/material-routing.module').then(m => m.MaterialRoutingModule)
     },
   ]
 ;
