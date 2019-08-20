@@ -4,7 +4,7 @@ import {User} from '@app/core/auth/user.model';
 
 import {Observable, of} from 'rxjs';
 import {fromPromise} from 'rxjs/internal-compatibility';
-import {catchError, map} from 'rxjs/operators';
+import {catchError, flatMap, map} from 'rxjs/operators';
 import {NotifierService} from '../notifications/simple-notifier.service';
 import {KeycloakService} from './keycloak.service';
 
@@ -22,16 +22,18 @@ export class KeycloakGuardService implements CanActivate, CanActivateChild {
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
 
-    const tokenPromise: Promise<string> = this.keycloakService.getToken();
-    const tokenObservable: Observable<string> = fromPromise(tokenPromise);
-
-    return tokenObservable.pipe(
+    return fromPromise(this.keycloakService.getToken()).pipe(
       map((token) => {
           return true;
         }
       ), catchError(error => {
-        this.notifierService.notifyError('Please LogIn' + error)
-        return of(false);
+        return this.notifierService
+          .notifyError(error, 'LOGIN')
+          .onAction()
+          .pipe(flatMap(() => {
+             KeycloakService.login();
+             return of(true);
+          }));
       }));
   }
 

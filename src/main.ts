@@ -1,9 +1,9 @@
 import 'hammerjs';
-import { enableProdMode } from '@angular/core';
-import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+import {enableProdMode} from '@angular/core';
+import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 
-import { AppModule } from './app/app.module';
-import { environment } from './environments/environment';
+import {AppModule} from './app/app.module';
+import {environment} from './environments/environment';
 import {KeycloakService} from '@app/core/auth/keycloak.service';
 
 if (environment.production) {
@@ -11,12 +11,8 @@ if (environment.production) {
 }
 
 
-if (environment.KEYCLOAK) {
-  KeycloakService.init()
-    .then(() => platformBrowserDynamic().bootstrapModule(AppModule))
-    .catch(e => {
-      console.error(e);
-    });
-} else {
-  platformBrowserDynamic().bootstrapModule(AppModule);
-}
+KeycloakService.init()
+  .then(() => platformBrowserDynamic().bootstrapModule(AppModule))
+  .catch(e => {
+    console.error(e);
+  });

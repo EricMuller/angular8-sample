@@ -28,9 +28,9 @@ export class JWTInterceptor implements HttpInterceptor {
           const contentType = event.headers.get('Content-Type');
           if (event.status === 401 || event.status === 400 || event.status === 422) {
             if ('application/json' === contentType) {
-              this.notifierService.notifyError(event.body.exception);
+              this.notifierService.notifyError(event.body.exception, 'OK');
             } else {
-              this.notifierService.notifyError(event.body);
+              this.notifierService.notifyError(event.body, 'OK');
             }
             return EMPTY;
           }
@@ -41,10 +41,10 @@ export class JWTInterceptor implements HttpInterceptor {
               return throwError(err);
             }
           } else {
-            this.notifierService.notifyError(err.exception);
+            this.notifierService.notifyError(err.exception, 'OK');
             return EMPTY;
           }
         }
-      ))
+      ));
   }
 }

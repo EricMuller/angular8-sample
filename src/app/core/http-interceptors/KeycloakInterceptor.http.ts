@@ -15,17 +15,13 @@ export class KeyCloakInterceptor implements HttpInterceptor {
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
-    const tokenPromise: Promise<string> = this.keycloakService.getToken();
-    const tokenObservable: Observable<string> = fromPromise(tokenPromise);
-
-    return tokenObservable.pipe(
+    return fromPromise(this.keycloakService.getToken()).pipe(
       catchError(error => of(error)),
       flatMap((accessToken) => {
-        console.log(accessToken);
+        console.log('KeyCloakInterceptor:' + accessToken);
         if (!accessToken) {
           return next.handle(req);
         }
-
         const request = req.clone({
           setHeaders: {
             Authorization: `Bearer ${accessToken}`

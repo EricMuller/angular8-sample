@@ -23,29 +23,19 @@ export class KeycloakService {
     KeycloakService.auth.loggedIn = false;
 
     return new Promise((resolve, reject) => {
-      keycloakAuth
-        .init({onLoad: 'login-required'})
+      keycloakAuth.init()
         .success(() => {
-          KeycloakService.auth.loggedIn = true;
+
           KeycloakService.auth.authz = keycloakAuth;
           KeycloakService.auth.logoutUrl =
-            keycloakAuth.authServerUrl +
-            '/realms/' +
-            environment.KEYCLOAK_REALM +
-            '/protocol/openid-connect/logout?redirect_uri=' +
-            document.baseURI;
+            keycloakAuth.authServerUrl + '/realms/' + environment.KEYCLOAK_REALM +
+            '/protocol/openid-connect/logout?redirect_uri=' + document.baseURI;
 
-          KeycloakService.auth.authz.loadUserProfile().success(data => {
-            this.user = new User();
-            this.user.user_name = data.username;
-            this.user.first_name = data.first_name;
-            this.user.last_name = data.last_name;
-            this.user.email = data.email;
+          resolve();
 
-            resolve();
-          });
         })
-        .error(() => {
+        .error((e) => {
+          console.error(e);
           reject();
         });
     });
@@ -54,7 +44,23 @@ export class KeycloakService {
   constructor() {
   }
 
-  hasAnyRole(roles: String[]): boolean {
+  static login(): void {
+    KeycloakService.auth.authz.login().success(
+      () => {
+        KeycloakService.auth.loggedIn = true;
+        KeycloakService.auth.authz.loadUserProfile()
+          .success(data => {
+            this.user = new User();
+            this.user.user_name = data.username;
+            this.user.first_name = data.first_name;
+            this.user.last_name = data.last_name;
+            this.user.email = data.email;
+          });
+      }
+    );
+  }
+
+  hasAnyRole(roles: string[]): boolean {
     for (let i = 0; i < roles.length; i++) {
       if (this.hasRole(roles[i])) {
         return true;
@@ -64,7 +70,7 @@ export class KeycloakService {
     return false;
   }
 
-  hasRole(role: String): boolean {
+  hasRole(role: string): boolean {
     return KeycloakService.auth.authz.hasRealmRole(role);
   }
 
@@ -76,16 +82,17 @@ export class KeycloakService {
     return new Promise<string>((resolve, reject) => {
 
       if (KeycloakService.auth.authz && KeycloakService.auth.authz.token) {
+
         KeycloakService.auth.authz
           .updateToken(90) // refresh token if it will expire in 90 seconds or less
           .success(() => {
-            resolve(<string> KeycloakService.auth.authz.token);
+            resolve(KeycloakService.auth.authz.token);
           })
           .error(() => {
             reject('Failed to refresh token');
           });
       } else {
-        reject('Not logged in with keycloack');
+        reject('Please logged in with keycloack');
       }
     });
   }
@@ -96,7 +103,7 @@ export class KeycloakService {
         KeycloakService.auth.authz
           .logout()
           .success(() => {
-            resolve(<string> KeycloakService.auth.authz.token);
+            resolve(KeycloakService.auth.authz.token);
           })
           .error(() => {
             reject('Failed to logout');
