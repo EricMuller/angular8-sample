@@ -14,8 +14,9 @@ import {MatListModule} from '@angular/material/list';
 import {Link1Component} from './features/link1/link1.component';
 import {Link2Component} from './features/link2/link2.component';
 import {Link3Component} from './features/link3/link3.component';
-import { SidenavLayoutComponent } from './app/sidenav-layout/sidenav-layout.component';
-import { LandscapeLayoutComponent } from './app/landscape-layout/landscape-layout.component';
+import {SidenavLayoutComponent} from './app/sidenav-layout/sidenav-layout.component';
+import {LandscapeLayoutComponent} from './app/landscape-layout/landscape-layout.component';
+import {CoreModule} from './core/core.module';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { LandscapeLayoutComponent } from './app/landscape-layout/landscape-layou
     MatButtonModule,
     MatSidenavModule,
     MatIconModule,
-    MatListModule
+    MatListModule,
+    CoreModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

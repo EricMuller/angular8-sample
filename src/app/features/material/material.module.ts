@@ -13,19 +13,19 @@ import {
   MatToolbarModule
 } from '@angular/material';
 import {JsonService} from './json.service';
-import {HttpClientModule} from '@angular/common/http';
 import {MatTableComponent} from './mat-table/mat-table.component';
 import {MatLayoutComponent} from './mat-layout/mat-layout.component';
 import {MatGridComponent} from './mat-grid/mat-grid.component';
 import {RouterModule} from '@angular/router';
+import {CoreModule} from '../../core/core.module';
 
 
 @NgModule({
   declarations: [MatListComponent, MatTableComponent, MatLayoutComponent, MatGridComponent],
   imports: [
-    CommonModule, HttpClientModule, RouterModule,
+    CommonModule,  RouterModule,
     MatListModule, MatIconModule, MatToolbarModule, MatCardModule, MatButtonModule, MatIconModule,
-    MatTableModule, MatMenuModule, MatGridListModule, MatTabsModule
+    MatTableModule, MatMenuModule, MatGridListModule, MatTabsModule, CoreModule.forRoot()
   ], providers: [JsonService]
 })
 export class MaterialModule {
