@@ -5,6 +5,7 @@ import {MatListComponent} from './mat-list/mat-list.component';
 import {MatTableComponent} from './mat-table/mat-table.component';
 import {MatLayoutComponent} from './mat-layout/mat-layout.component';
 import {MatGridComponent} from './mat-grid/mat-grid.component';
+import {MaterialModule} from './material.module';
 
 const routes: Routes = [
   {
@@ -20,7 +21,7 @@ const routes: Routes = [
         path: 'grid', component: MatGridComponent,
       },
       {
-        path: '', component: MatGridComponent,
+        path: '', redirectTo: 'grid', pathMatch: 'full'
       },
     ]
 
@@ -28,7 +29,8 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
+  imports: [MaterialModule,
+    RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
 export class MaterialRoutingModule {

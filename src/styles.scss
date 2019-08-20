@@ -19,17 +19,22 @@ body {
   width: 85%;
 }
 
+
+
+
 @import '~@angular/material/theming';
 
 // always include only once per project
 @include mat-core();
-
 // import our custom theme
-@import 'my-theme.scss';
-
+@import 'themes/light-blue-theme';
+@import 'themes/dark-blue-theme';
 // specify theme class eg: <body class="my-theme"> ... </body>
-.my-theme {
-
+.dark-blue-theme {
   // use our theme with angular-material-theme mixin
-  @include angular-material-theme($my-theme);
+  @include angular-material-theme($dark-blue-theme);
+}
+
+.light-blue-theme {
+  @include angular-material-theme($light-blue-theme);
 }

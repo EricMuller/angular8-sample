@@ -7,9 +7,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MatLayoutComponent implements OnInit {
 
+  links = [
+    { link: 'list', label: 'List' },
+    { link: 'grid', label: 'Grid' },
+    { link: 'table', label: 'Table' },
+  ];
+
   constructor() { }
 
   ngOnInit() {
   }
+
 
 }

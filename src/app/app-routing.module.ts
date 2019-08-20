@@ -1,9 +1,9 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {HomeComponent} from './home/home.component';
-import {Link1Component} from './link1/link1.component';
-import {Link2Component} from './link2/link2.component';
-import {Link3Component} from './link3/link3.component';
+import {HomeComponent} from './features/home/home.component';
+import {Link1Component} from './features/link1/link1.component';
+import {Link2Component} from './features/link2/link2.component';
+import {Link3Component} from './features/link3/link3.component';
 
 
 const routes: Routes = [
@@ -20,9 +20,10 @@ const routes: Routes = [
     {
       path: 'link3',
       component: Link3Component,
-    }, {
+    },
+    {
       path: 'material',
-      loadChildren: './modules/material/material.module#MaterialModule',
+      loadChildren: './features/material/material-routing.module#MaterialRoutingModule',
     },
   ]
 ;

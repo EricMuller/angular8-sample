@@ -1,0 +1,12 @@
+// define 3 theme color
+// mat-palette accepts $palette-name, main, lighter and darker variants
+$light-blue-theme-primary: mat-palette($mat-indigo, 700, 300, 900);
+$light-blue-theme-accent: mat-palette($mat-light-blue);
+$light-blue-theme-warn: mat-palette($mat-deep-orange, A200);
+
+// create theme (use mat-dark-theme for themes with dark backgrounds)
+$light-blue-theme: mat-light-theme(
+    $light-blue-theme-primary,
+    $light-blue-theme-accent,
+    $light-blue-theme-warn
+);
